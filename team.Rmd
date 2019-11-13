@@ -16,25 +16,33 @@ library(dplyr)
 library(ggplot2)
 ```
 
-
+###1
 ```{r}
-####1
 diabetes = read.table("diabetes.txt", header = TRUE)
 str(diabetes)
 ```
-
-```{r}
 ####2
+```{r}
 diabetes[which(diabetes$frame == ''), 'frame'] = NA
 diabetes$frame = droplevels(diabetes$frame)
 ```
-
-```{r}
 ###3
+```{r}
 diabetes_reduced = select(diabetes, -id, -bp.2s, -bp.2d)
 ```
-
-```{r}
 ###4
+```{r}
 diabetes_clean = diabetes_reduced[complete.cases(diabetes_reduced),]
 ```
+####5
+```{r}
+summary(diabetes_clean)
+```
+You can see that Step 4 was completed correctly beause summary does not show any NA values. 
+
+####6
+```{r}
+diabetes_clean = mutate(diabetes_clean, glyhb_star = log(glyhb))
+ggplot(diabetes_clean, aes(glyhb_star)) + geom_histogram(bins = 10)
+```
+We have used a log transformation on the dataset. It is a relatively strong transformation which makes its interpretability much harder.However, the transformation works because the graph is less right skewed. If you account for less bins, the distribution appears to much more normal.
