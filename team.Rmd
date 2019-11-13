@@ -40,9 +40,25 @@ summary(diabetes_clean)
 ```
 You can see that Step 4 was completed correctly beause summary does not show any NA values. 
 
-####6
+####6 & 7
 ```{r}
 diabetes_clean = mutate(diabetes_clean, glyhb_star = log(glyhb))
 ggplot(diabetes_clean, aes(glyhb_star)) + geom_histogram(bins = 10)
 ```
+
 We have used a log transformation on the dataset. It is a relatively strong transformation which makes its interpretability much harder.However, the transformation works because the graph is less right skewed. If you account for less bins, the distribution appears to much more normal.
+
+####8 
+```{r}
+diabetes_clean %>% group_by(frame) %>% summarise(mean.glyhb = mean(glyhb_star))
+
+diabetes_clean %>% group_by(waist) %>% summarise(mean.glyhb = mean(glyhb_star))
+
+diabetes_clean %>% group_by(height) %>% summarise(mean.glyhb = mean(glyhb_star))
+
+diabetes_clean %>% group_by(location) %>% summarise(mean.glyhb = mean(glyhb_star))
+
+diabetes_clean %>% group_by(gender) %>% summarise(mean.glyhb = mean(glyhb_star))
+```
+
+`frame`, `waist`, & `height` all have a correlation, as the variable gets larger, the average Glycosolated Hemoglobin has a positive relationship and increases as well. When we summarized `location` & `gender` we found not relationship with the Glycosolated Hemoglobin. 
