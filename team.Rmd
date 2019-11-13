@@ -62,16 +62,14 @@ diabetes_clean %>% group_by(gender) %>% summarise(mean.glyhb = mean(glyhb_star))
 ```
 
 `frame`, `waist`, & `height` all have a correlation, as the variable gets larger, the average Glycosolated Hemoglobin has a positive relationship and increases as well. When we summarized `location` & `gender` we found not relationship with the Glycosolated Hemoglobin. 
-
-```{r}
 ###10
+```{r}
 diabetes_clean %>% group_by(frame, location) %>% summarise(mean.glyhb_star=mean(glyhb_star)) %>%
   ggplot(aes(x = frame, y = mean.glyhb_star, color=location))+
   geom_point()
 ```
-
-```{r}
 ###11
+```{r}
 ggplot(diabetes_clean, aes(ratio, glyhb_star)) + geom_point()
 ggplot(diabetes_clean, aes(bp.1s, glyhb_star)) + geom_point()
 ggplot(diabetes_clean, aes(age, glyhb_star)) + geom_point()
@@ -80,3 +78,6 @@ ggplot(diabetes_clean, aes(weight, glyhb_star)) + geom_point()
 ggplot(diabetes_clean, aes(x = gender, y = glyhb_star)) + geom_boxplot()
 ```
 
+```{r}
+ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point(aes(color = diabetes_clean$weight)) +  facet_wrap(~frame) +labs(title = "Weight & Waist Length by Frame Size", x = "Waist Length (inches)", y = "Weight (lbs)")
+```
