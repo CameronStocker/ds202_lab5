@@ -89,6 +89,7 @@ ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point() +  facet_w
 
 ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point(aes(color = diabetes_clean$gender)) + facet_wrap(~frame) +labs(title = "Weight & Waist Length by Frame Size", x = "Waist Length (inches)", y = "Weight (lbs)",color='Gender', alpha= "Transparency") 
 ```
+
 When visualizing the graphs above, we did not find any issues with overplotting. We added color and a smoothing line to create better insights for the relationship between the different frame sizes and the relationship between `frame` and `gender`
 
 ###13
@@ -108,6 +109,7 @@ summary(fit)
 We can see that this model has a significant relationship with the log of `glyhb`. We know this because we have a large F-statistic of 77.49 with a small p-value of <2.2e-16, which is less than any reasonable alpha. The adjusted r-squared tells us that 55.7% of the variation in the log of `glyhb` can be explained by this model. 
 
 ###17
+  Below 
 B0 = 0.8331: estimate of the mean value of log of glycosolated hemoglobin when stabilized glucose, age, waist, and cholesterol/HDL ratio are equal to 0 and the frame is large.
 
 B1 = 0.0035: estimate of the change in the mean of log of glycosolated hemoglobin when stabilized glucose increases by 1 unit, holding all other covariates constant.
@@ -134,3 +136,31 @@ predict.lm(fit, newdiabetes, interval = "prediction")
 The estimated fitted values are estimates of the mean log of glycosolated hemoglobin for a given combination of stabilized glucose, age, waist, Cholesterol/HDL ratio, and frame. The Y^Y^ for this combination of values is 1.5364.
 
 ###19
+**Pros of Linear Regression over KNN Regression**
+
+Linear Regression will create a "shape" for the data because it is parametric. 
+Parametric models are easier to interpret. 
+Relatively quick compared to KNN regression.
+
+**Cons of Linear Regression over KNN Regression**
+
+The data cannot actually speak for itself, because we don't really know if the assumptions we made are true. 
+Linear regression has the common problem of overfitting. 
+
+
+###20
+**Most surprising parts of Data Science: **
+
+One of the main things that was truly surprising about Data Science has been the amount of prep work that goes into cleaning and tidying data. Before you can make analysis and give insights about the data you are working with, you must first make it workable. Learning about the various different packages supported by R for visualization has opened our mind about new ways that data can be visualized. 
+
+**Most challenging parts of Data Science: **
+
+Something that has been a little bit hard has been collaboration. You can collaborate with people via the internet, like getting help from StackOverflow, Reddit, or Piazza. However, in terms of real time collaboration with a team or partner is still tough because you must be in direct communication with the group before you push or pull your work to Github. Additionally, thinking outside of the box has proved to be a very valuable trait when working with data that seems elementary or dry. 
+
+**Most enjoyable parts of Data Science:**
+
+We believe that there is a moment where you can feel that you have transformed data into information. This moment is the reason why data scientists are in such high demand and we can give insights that somebody without a data science would not be able to achieve. Being able to explain things and teach people about various subjects using data is very empowering in our modern society where more than 2.5 quintillion bytes of data are collected everyday. 
+
+**Owner Github Username: CameronStocker**
+**Partner Github Username: tkruzan**
+**Repo Name: ds202_lab5**
