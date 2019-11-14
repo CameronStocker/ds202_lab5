@@ -85,3 +85,14 @@ ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point(aes(color = 
 The gather function takes multiple columns that should be values of a variables and converts them into 2 columns: key and value. Where the key is the name of the column for the new variable that has the values that you are wanting to transform and the value is the value of that variable that you are wanting to "gather".
 
 The spread function is the inverse of that as it is used when there is a column that contains values that should be variable headers instead. 
+
+###14
+```{r}
+fit = lm(glyhb_star ~ stab.glu + age + waist + ratio + factor(frame), data = diabetes_clean)
+summary(fit)
+```
+
+We can see that this model has a significant relationship with the log of glyhb. We know this because we have a large F-statistic of 77.49 with a small p-value of <2.2e-16, which is less than any reasonable alpha. The adjusted r-squared tells us that 55.7% of the variation in the log of glyhb can be explained by this model. 
+
+###15
+
