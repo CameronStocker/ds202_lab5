@@ -79,15 +79,19 @@ ggplot(diabetes_clean, aes(x = gender, y = glyhb_star)) + geom_boxplot()
 ```
 ####12
 ```{r}
-ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point(aes(color = diabetes_clean$gender)) +  facet_wrap(~frame)+ geom_smooth() +labs(title = "Weight & Waist Length by Frame Size", x = "Waist Length (inches)", y = "Weight (lbs)",color='Gender') 
+ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point() +  facet_wrap(~frame)+ geom_smooth() +labs(title = "Weight & Waist Length by Frame Size", x = "Waist Length (inches)", y = "Weight (lbs)", alpha= "Transparency") 
+
+ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point(aes(color = diabetes_clean$gender)) + facet_wrap(~frame) +labs(title = "Weight & Waist Length by Frame Size", x = "Waist Length (inches)", y = "Weight (lbs)",color='Gender', alpha= "Transparency") 
 ```
+When visualizing the graphs above, we did not find any issues with overplotting. We added color and a smoothing line to create better insights for the relationship between the different frame sizes and the relationship between `frame` and `gender`
+
 ###13
-The gather function takes multiple columns that should be values of a variables and converts them into 2 columns: key and value. Where the key is the name of the column for the new variable that has the values that you are wanting to transform and the value is the value of that variable that you are wanting to "gather".
+The `gather` function takes multiple columns that should be values of a variables and converts them into 2 columns: key and value. Where the key is the name of the column for the new variable that has the values that you are wanting to transform and the value is the value of that variable that you are wanting to `gather`.
 
 The spread function is the inverse of that as it is used when there is a column that contains values that should be variable headers instead. 
 
 ###14
-
+`gather` & `spread` are not exact complements of each other, in fact they are opposites of each other. `spread` turns a key-value pair into a set of tidy-columns. `gather` turns a set of column names into a single key column.
 
 ###15
 ```{r}
