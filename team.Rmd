@@ -79,5 +79,5 @@ ggplot(diabetes_clean, aes(x = gender, y = glyhb_star)) + geom_boxplot()
 ```
 ####12
 ```{r}
-ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point(aes(color = diabetes_clean$weight)) +  facet_wrap(~frame) +labs(title = "Weight & Waist Length by Frame Size", x = "Waist Length (inches)", y = "Weight (lbs)")
+ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point(aes(color = diabetes_clean$weight)) +  facet_wrap(~frame)+ geom_smooth() +labs(title = "Weight & Waist Length by Frame Size", x = "Waist Length (inches)", y = "Weight (lbs)")
 ```
