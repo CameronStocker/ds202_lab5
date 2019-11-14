@@ -112,6 +112,17 @@ B3 = 0.0048: estimate of the change in the mean of log of glycosolated hemoglobi
 
 B4 = 0.0219: estimate of the change in the mean of log of glycosolated hemoglobin when Cholesterol/HDL ratio increases by 1 unit, holding all other covariates constant.
 
-B5 = 0.0309: estimate of the difference in the predicted glycosolated hemoglobin when frame is medium instead of large, holding all other covariates constant.
+B5 = 0.0309: estimate of the difference in the predicted log of glycosolated hemoglobin when frame is medium instead of large, holding all other covariates constant.
 
-B6 = 0.0132: estimate of the difference in the predicted glycosolated hemoglobin when frame is small instead of large, holding all other covariates constant.
+B6 = 0.0132: estimate of the difference in the predicted log of glycosolated hemoglobin when frame is small instead of large, holding all other covariates constant.
+
+###18
+```{r}
+fit$fitted.values
+newdiabetes = data.frame(stab.glu=90, age=35,waist=30,ratio=5.1,frame="small")
+predict.lm(fit, newdiabetes, interval = "prediction")
+```
+
+The estimated fitted values are estimates of the mean log of glycosolated hemoglobin for a given combination of stabilized glucose, age, waist, Cholesterol/HDL ratio, and frame. The Y^Y^ for this combination of values is 1.5364.
+
+###19
