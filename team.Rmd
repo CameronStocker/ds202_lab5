@@ -21,34 +21,38 @@ library(ggplot2)
 diabetes = read.table("diabetes.txt", header = TRUE)
 str(diabetes)
 ```
-####2
+
+###2
 ```{r}
 diabetes[which(diabetes$frame == ''), 'frame'] = NA
 diabetes$frame = droplevels(diabetes$frame)
 ```
+
 ###3
 ```{r}
 diabetes_reduced = select(diabetes, -id, -bp.2s, -bp.2d)
 ```
+
 ###4
 ```{r}
 diabetes_clean = diabetes_reduced[complete.cases(diabetes_reduced),]
 ```
-####5
+
+###5
 ```{r}
 summary(diabetes_clean)
 ```
 You can see that Step 4 was completed correctly beause summary does not show any NA values. 
 
-####6 & 7
+###6 & 7
 ```{r}
 diabetes_clean = mutate(diabetes_clean, glyhb_star = log(glyhb))
-ggplot(diabetes_clean, aes(glyhb_star)) + geom_histogram(bins = 10)
+ggplot(diabetes_clean, aes(glyhb_star)) + geom_histogram(bins = 10) + labs(x = "Glycosolated Hemoglobin", y= "Frequency", title = "Histogram of log(Glycosolated Hemoglobin)")
 ```
 
-We have used a log transformation on the dataset. It is a relatively strong transformation which makes its interpretability much harder.However, the transformation works because the graph is less right skewed. If you account for less bins, the distribution appears to much more normal.
+We have used a log transformation on the dataset. It is a relatively strong transformation which makes its interpretability harder. However, the transformation works because the graph is less right skewed. If you account for less bins, the distribution appears to much more normal.
 
-####8 
+###8 
 ```{r}
 diabetes_clean %>% group_by(frame) %>% summarise(mean.glyhb = mean(glyhb_star))
 
@@ -68,16 +72,18 @@ diabetes_clean %>% group_by(frame, location) %>% summarise(mean.glyhb_star=mean(
   ggplot(aes(x = frame, y = mean.glyhb_star, color=location))+
   geom_point()
 ```
+
 ###11
 ```{r}
-ggplot(diabetes_clean, aes(ratio, glyhb_star)) + geom_point()
-ggplot(diabetes_clean, aes(bp.1s, glyhb_star)) + geom_point()
-ggplot(diabetes_clean, aes(age, glyhb_star)) + geom_point()
-ggplot(diabetes_clean, aes(hip, glyhb_star)) + geom_point()
-ggplot(diabetes_clean, aes(weight, glyhb_star)) + geom_point()
-ggplot(diabetes_clean, aes(x = gender, y = glyhb_star)) + geom_boxplot()
+ggplot(diabetes_clean, aes(ratio, glyhb_star)) + geom_point() + labs(x = "Cholesterol/HDL Ratio", y = "log(Glycosolated Hemoglobin)", title = "Cholesterol/HDL Ratio vs. log(Glycosolated Hemoglobin)")
+ggplot(diabetes_clean, aes(bp.1s, glyhb_star)) + geom_point() + labs(x = "First Systolic Blood Pressure", y = "log(Glycosolated Hemoglobin)", title = "First Systolic BP vs. log(Glycosolated Hemoglobin)")
+ggplot(diabetes_clean, aes(age, glyhb_star)) + geom_point() + labs(x = "Age", y = "log(Glycosolated Hemoglobin)", title = "Age vs. log(Glycosolated Hemoglobin)")
+ggplot(diabetes_clean, aes(hip, glyhb_star)) + geom_point() + labs(x = "Hip Measurement (inches)", y = "log(Glycosolated Hemoglobin)", title = "Hip Measurement vs. log(Glycosolated Hemoglobin)")
+ggplot(diabetes_clean, aes(weight, glyhb_star)) + geom_point() + labs(x = "Weight (lbs)", y = "log(Glycosolated Hemoglobin)", title = "Weight vs. log(Glycosolated Hemoglobin)")
+ggplot(diabetes_clean, aes(x = gender, y = glyhb_star)) + geom_boxplot() + labs(x = "Gender", y = "log(Glycosolated Hemoglobin)", title = "Gender vs. log(Glycosolated Hemoglobin) Boxplot")
 ```
-####12
+
+###12
 ```{r}
 ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point() +  facet_wrap(~frame)+ geom_smooth() +labs(title = "Weight & Waist Length by Frame Size", x = "Waist Length (inches)", y = "Weight (lbs)", alpha= "Transparency") 
 
@@ -88,7 +94,7 @@ When visualizing the graphs above, we did not find any issues with overplotting.
 ###13
 The `gather` function takes multiple columns that should be values of a variables and converts them into 2 columns: key and value. Where the key is the name of the column for the new variable that has the values that you are wanting to transform and the value is the value of that variable that you are wanting to `gather`.
 
-The spread function is the inverse of that as it is used when there is a column that contains values that should be variable headers instead. 
+The `spread` function is the inverse of that as it is used when there is a column that contains values that should be variable headers instead. 
 
 ###14
 `gather` & `spread` are not exact complements of each other, in fact they are opposites of each other. `spread` turns a key-value pair into a set of tidy-columns. `gather` turns a set of column names into a single key column.
@@ -99,7 +105,7 @@ fit = lm(glyhb_star ~ stab.glu + age + waist + ratio + factor(frame), data = dia
 summary(fit)
 ```
 
-We can see that this model has a significant relationship with the log of glyhb. We know this because we have a large F-statistic of 77.49 with a small p-value of <2.2e-16, which is less than any reasonable alpha. The adjusted r-squared tells us that 55.7% of the variation in the log of glyhb can be explained by this model. 
+We can see that this model has a significant relationship with the log of `glyhb`. We know this because we have a large F-statistic of 77.49 with a small p-value of <2.2e-16, which is less than any reasonable alpha. The adjusted r-squared tells us that 55.7% of the variation in the log of `glyhb` can be explained by this model. 
 
 ###17
 B0 = 0.8331: estimate of the mean value of log of glycosolated hemoglobin when stabilized glucose, age, waist, and cholesterol/HDL ratio are equal to 0 and the frame is large.
@@ -112,13 +118,15 @@ B3 = 0.0048: estimate of the change in the mean of log of glycosolated hemoglobi
 
 B4 = 0.0219: estimate of the change in the mean of log of glycosolated hemoglobin when Cholesterol/HDL ratio increases by 1 unit, holding all other covariates constant.
 
-B5 = 0.0309: estimate of the difference in the predicted log of glycosolated hemoglobin when frame is medium instead of large, holding all other covariates constant.
+B5 = 0.0309: estimate of the difference in the predicted glycosolated hemoglobin when frame is medium instead of large, holding all other covariates constant.
 
-B6 = 0.0132: estimate of the difference in the predicted log of glycosolated hemoglobin when frame is small instead of large, holding all other covariates constant.
+B6 = 0.0132: estimate of the difference in the predicted glycosolated hemoglobin when frame is small instead of large, holding all other covariates constant.
 
 ###18
-```{r}
+```{r, include=FALSE}
 fit$fitted.values
+```
+```{r}
 newdiabetes = data.frame(stab.glu=90, age=35,waist=30,ratio=5.1,frame="small")
 predict.lm(fit, newdiabetes, interval = "prediction")
 ```
