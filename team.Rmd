@@ -81,3 +81,7 @@ ggplot(diabetes_clean, aes(x = gender, y = glyhb_star)) + geom_boxplot()
 ```{r}
 ggplot(diabetes_clean,aes(y=weight,x=waist,alpha=0.5)) + geom_point(aes(color = diabetes_clean$weight)) +  facet_wrap(~frame)+ geom_smooth() +labs(title = "Weight & Waist Length by Frame Size", x = "Waist Length (inches)", y = "Weight (lbs)")
 ```
+###13
+The gather function takes multiple columns that should be values of a variables and converts them into 2 columns: key and value. Where the key is the name of the column for the new variable that has the values that you are wanting to transform and the value is the value of that variable that you are wanting to "gather".
+
+The spread function is the inverse of that as it is used when there is a column that contains values that should be variable headers instead. 
