@@ -391,8 +391,8 @@ summary(fit)</code></pre>
 <p>We can see that this model has a significant relationship with the log of <code>glyhb</code>. We know this because we have a large F-statistic of 77.49 with a small p-value of &lt;2.2e-16, which is less than any reasonable alpha. The adjusted r-squared tells us that 55.7% of the variation in the log of <code>glyhb</code> can be explained by this model.</p>
 </div>
 <div id="section-12" class="section level3">
-<h3>17</h3>
-<p>Below B0 = 0.8331: estimate of the mean value of log of glycosolated hemoglobin when stabilized glucose, age, waist, and cholesterol/HDL ratio are equal to 0 and the frame is large.</p>
+<h3>16</h3>
+<p>B0 = 0.8331: estimate of the mean value of log of glycosolated hemoglobin when stabilized glucose, age, waist, and cholesterol/HDL ratio are equal to 0 and the frame is large.</p>
 <p>B1 = 0.0035: estimate of the change in the mean of log of glycosolated hemoglobin when stabilized glucose increases by 1 unit, holding all other covariates constant.</p>
 <p>B2 = 0.0034: estimate of the change in the mean of log of glycosolated hemoglobin when age increases by 1 year, holding all other covariates constant.</p>
 <p>B3 = 0.0048: estimate of the change in the mean of log of glycosolated hemoglobin when waist increases by 1 inches, holding all other covariates constant.</p>
@@ -401,7 +401,7 @@ summary(fit)</code></pre>
 <p>B6 = 0.0132: estimate of the difference in the predicted glycosolated hemoglobin when frame is small instead of large, holding all other covariates constant.</p>
 </div>
 <div id="section-13" class="section level3">
-<h3>18</h3>
+<h3>17</h3>
 <pre class="r"><code>newdiabetes = data.frame(stab.glu=90, age=35,waist=30,ratio=5.1,frame=&quot;small&quot;)
 predict.lm(fit, newdiabetes, interval = &quot;prediction&quot;)</code></pre>
 <pre><code>##       fit      lwr      upr
@@ -409,13 +409,18 @@ predict.lm(fit, newdiabetes, interval = &quot;prediction&quot;)</code></pre>
 <p>The estimated fitted values are estimates of the mean log of glycosolated hemoglobin for a given combination of stabilized glucose, age, waist, Cholesterol/HDL ratio, and frame. The Y<sup>Y</sup> for this combination of values is 1.5364.</p>
 </div>
 <div id="section-14" class="section level3">
+<h3>18</h3>
+<p>Inferences are conclusions based on facts or evidence about something in the present. An example would be that if <code>weight</code> and <code>glyhb</code> have a positive relationship, then you would deduce or infer that as <code>weight</code> increases so does <code>glyhb</code>. If you see a bunch of people wearing winter coats, you could infer that it is cold outside.</p>
+<p>Predictions are conclusions based on facts or evidence about something that will or may happen in the future. An example would be that if there is a low pressure &amp; high pressure system in the Ames area, you could predict that there may be a tornado tomorrow.</p>
+</div>
+<div id="section-15" class="section level3">
 <h3>19</h3>
 <p><strong>Pros of Linear Regression over KNN Regression</strong></p>
 <p>Linear Regression will create a “shape” for the data because it is parametric. Parametric models are easier to interpret. Relatively quick compared to KNN regression.</p>
 <p><strong>Cons of Linear Regression over KNN Regression</strong></p>
 <p>The data cannot actually speak for itself, because we don’t really know if the assumptions we made are true. Linear regression has the common problem of overfitting.</p>
 </div>
-<div id="section-15" class="section level3">
+<div id="section-16" class="section level3">
 <h3>20</h3>
 <p><strong>Most surprising parts of Data Science: </strong></p>
 <p>One of the main things that was truly surprising about Data Science has been the amount of prep work that goes into cleaning and tidying data. Before you can make analysis and give insights about the data you are working with, you must first make it workable. Learning about the various different packages supported by R for visualization has opened our mind about new ways that data can be visualized.</p>

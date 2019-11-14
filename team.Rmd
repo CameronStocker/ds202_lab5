@@ -108,8 +108,8 @@ summary(fit)
 
 We can see that this model has a significant relationship with the log of `glyhb`. We know this because we have a large F-statistic of 77.49 with a small p-value of <2.2e-16, which is less than any reasonable alpha. The adjusted r-squared tells us that 55.7% of the variation in the log of `glyhb` can be explained by this model. 
 
-###17
-  Below 
+###16
+
 B0 = 0.8331: estimate of the mean value of log of glycosolated hemoglobin when stabilized glucose, age, waist, and cholesterol/HDL ratio are equal to 0 and the frame is large.
 
 B1 = 0.0035: estimate of the change in the mean of log of glycosolated hemoglobin when stabilized glucose increases by 1 unit, holding all other covariates constant.
@@ -124,7 +124,7 @@ B5 = 0.0309: estimate of the difference in the predicted glycosolated hemoglobin
 
 B6 = 0.0132: estimate of the difference in the predicted glycosolated hemoglobin when frame is small instead of large, holding all other covariates constant.
 
-###18
+###17
 ```{r, include=FALSE}
 fit$fitted.values
 ```
@@ -134,6 +134,11 @@ predict.lm(fit, newdiabetes, interval = "prediction")
 ```
 
 The estimated fitted values are estimates of the mean log of glycosolated hemoglobin for a given combination of stabilized glucose, age, waist, Cholesterol/HDL ratio, and frame. The Y^Y^ for this combination of values is 1.5364.
+
+###18
+Inferences are conclusions based on facts or evidence about something in the present. An example would be that if `weight` and `glyhb` have a positive relationship, then you would deduce or infer that as `weight` increases so does `glyhb`. If you see a bunch of people wearing winter coats, you could infer that it is cold outside.
+
+Predictions are conclusions based on facts or evidence about something that will or may happen in the future. An example would be that if there is a low pressure & high pressure system in the Ames area, you could predict that there may be a tornado tomorrow. 
 
 ###19
 **Pros of Linear Regression over KNN Regression**
